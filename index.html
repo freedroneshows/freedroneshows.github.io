@@ -1,0 +1,778 @@
+<!doctype html>
+<html>
+<head>
+<meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Drone Spectacular Residency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a night sky. One dark ground, a gold "drone light" accent, poster-condensed display type,
+   and a mono spec voice for the numbers a show producer actually uses. Single dark theme by choice. */
+:root {
+  --sky: #05070d;
+  --sky-2: #0b101c;
+  --sky-3: #121a2b;
+  --line: #222c42;
+  --fg: #f2eee4;
+  --muted: #a3a9b8;
+  --gold: #e3b964;
+  --gold-hi: #f6d58f;
+  --ink: #120d03;
+  --focus: #9fc3ff;
+  --display: "Big Shoulders Display", "Oswald", "Arial Narrow", sans-serif;
+  --body: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --wrap: 1180px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--sky);
+  color: var(--fg);
+  font: 400 17px/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); }
+a:hover { color: var(--gold-hi); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: 24px; }
+@media (max-width: 480px) { .wrap { padding-inline: 18px; } }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: 0.005em; line-height: 0.95; text-wrap: balance; margin: 0; text-transform: uppercase; }
+h2 { font-size: clamp(2.6rem, 5.5vw, 4.4rem); }
+h3 { font-size: 1.7rem; font-weight: 700; line-height: 1.05; }
+p { margin: 0; }
+.eyebrow { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 60ch; }
+.mono { font-family: var(--mono); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 50px; padding: 0 24px; border-radius: 999px;
+  font: 600 1rem/1 var(--body); text-decoration: none; cursor: pointer;
+  border: 1px solid var(--gold); transition: background .2s, color .2s, transform .2s;
+}
+.btn-gold { background: var(--gold); color: var(--ink); }
+.btn-gold:hover { background: var(--gold-hi); color: var(--ink); }
+.btn-ghost { background: transparent; color: var(--fg); border-color: #4a5671; }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-hi); }
+
+/* Header */
+header.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: rgba(5,7,13,0.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 68px; flex-wrap: wrap; }
+.brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: var(--fg); }
+.brand b { font-family: var(--display); font-size: 1.9rem; font-weight: 800; letter-spacing: 0.14em; color: var(--gold); }
+.brand span { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+nav.links { display: flex; gap: 22px; margin-left: auto; flex-wrap: wrap; }
+nav.links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; padding: 10px 0; }
+nav.links a:hover { color: var(--fg); }
+.top .btn { min-height: 42px; padding: 0 18px; font-size: 0.92rem; }
+@media (max-width: 860px) { nav.links { display: none; } .top .btn { margin-left: auto; } }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 40px; padding-block: 72px 64px; }
+.hero-copy { flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 24px; position: relative; z-index: 2; }
+.hero h1 { font-size: clamp(3.4rem, 8.2vw, 7rem); }
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero .ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-sky { flex: 1 1 420px; min-width: 0; position: relative; aspect-ratio: 1 / 1; max-width: 100%; max-height: 560px; }
+.hero-sky canvas { width: 100%; height: 100%; display: block; }
+.sky-caption { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; }
+.specline { display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.specline span b { color: var(--fg); font-weight: 500; }
+
+/* Proof */
+.proof { background: var(--sky-2); border-bottom: 1px solid var(--line); }
+.proof .wrap { padding-block: 40px; display: flex; flex-direction: column; gap: 28px; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+@media (max-width: 860px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.stat { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.stat strong { font-family: var(--display); font-size: 2.6rem; font-weight: 800; color: var(--gold); line-height: 1; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 0.95rem; }
+.partners { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 26px; padding-top: 22px; border-top: 1px solid var(--line); }
+.partners .eyebrow { color: var(--muted); margin-right: 6px; }
+.partners span { font-family: var(--display); font-weight: 700; font-size: 1.25rem; letter-spacing: 0.06em; text-transform: uppercase; color: #cfd3dc; }
+
+section.block { padding-block: 96px; border-bottom: 1px solid var(--line); }
+@media (max-width: 600px) { section.block { padding-block: 64px; } }
+.head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+@media (max-width: 860px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+.step { padding: 28px 28px 8px 0; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.step + .step { padding-left: 28px; border-left: 1px solid var(--line); }
+@media (max-width: 860px) { .step + .step { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); } }
+.step .n { font-family: var(--mono); color: var(--gold); font-size: 0.85rem; letter-spacing: 0.1em; }
+.step p { color: var(--muted); }
+
+/* Audience switch */
+.switch { display: inline-flex; padding: 5px; border: 1px solid var(--line); border-radius: 999px; background: var(--sky-2); gap: 4px; flex-wrap: wrap; }
+.switch button {
+  min-height: 46px; padding: 0 22px; border-radius: 999px; border: 0; background: transparent;
+  color: var(--muted); font: 600 0.98rem var(--body); cursor: pointer;
+}
+.switch button[aria-selected="true"] { background: var(--gold); color: var(--ink); }
+.panel { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 48px; }
+.panel-copy { flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.panel-copy h3 { font-size: clamp(2rem, 3.6vw, 2.8rem); }
+.panel-list { flex: 1 1 420px; min-width: 0; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.panel-list li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.panel-list li:first-child { border-top: 1px solid var(--line); }
+.panel-list .k { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); padding-top: 4px; }
+.panel-list .v { color: var(--fg); }
+@media (max-width: 520px) { .panel-list li { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+
+/* Tiers */
+.tiers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1040px) { .tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .tiers { grid-template-columns: minmax(0, 1fr); } }
+.tier { background: var(--sky-2); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.tier.feature { border-color: var(--gold); background: linear-gradient(180deg, #17140b 0%, var(--sky-2) 55%); }
+.tier .scope { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.tier .price { font-family: var(--mono); font-size: 0.95rem; color: var(--gold-hi); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 10px 0; }
+.tier ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; color: var(--muted); font-size: 0.96rem; }
+.tier li { padding-left: 18px; position: relative; }
+.tier li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px var(--gold); }
+.tier .btn { margin-top: auto; }
+.addons { margin-top: 28px; color: var(--muted); font-size: 0.98rem; }
+.addons b { color: var(--fg); font-weight: 600; }
+
+/* Season sheet */
+.sheet { display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start; }
+.sheet-copy { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.sheet-table { flex: 1 1 520px; min-width: 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: var(--sky-2); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+caption { text-align: left; padding: 18px 22px 0; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+th, td { text-align: left; padding: 14px 22px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child th, tr:last-child td { border-bottom: 0; }
+th { font-family: var(--mono); font-weight: 500; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+td { color: var(--fg); font-variant-numeric: tabular-nums; }
+
+/* Safety */
+.safety { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+@media (max-width: 1040px) { .safety { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .safety { grid-template-columns: minmax(0, 1fr); } }
+.safe { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.safe svg { width: 34px; height: 34px; stroke: var(--gold); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.safe h3 { font-size: 1.4rem; }
+.safe p { color: var(--muted); font-size: 0.97rem; }
+
+/* FAQ */
+.faq-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
+@media (max-width: 860px) { .faq-cols { grid-template-columns: minmax(0, 1fr); } }
+.faq-col h3 { font-size: 1.3rem; color: var(--gold); margin-bottom: 8px; }
+details { border-bottom: 1px solid var(--line); }
+summary { list-style: none; cursor: pointer; padding: 18px 36px 18px 0; position: relative; font-weight: 600; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; position: absolute; right: 4px; top: 14px; font-family: var(--mono); font-size: 1.3rem; color: var(--gold); }
+details[open] summary::after { content: "–"; }
+details p { color: var(--muted); padding-bottom: 20px; max-width: 62ch; }
+
+/* Apply */
+.apply { background: radial-gradient(1200px 500px at 80% -10%, #1a2238 0%, var(--sky) 60%); }
+.apply-grid { display: flex; flex-wrap: wrap; gap: 48px; }
+.apply-copy { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.contact-lines { display: flex; flex-direction: column; gap: 8px; font-family: var(--mono); font-size: 0.9rem; color: var(--muted); }
+.contact-lines b { color: var(--fg); font-weight: 500; user-select: all; }
+.form-card { flex: 1.4 1 520px; min-width: 0; background: var(--sky-2); border: 1px solid var(--line); border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 22px; }
+@media (max-width: 480px) { .form-card { padding: 20px; } }
+form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; }
+@media (max-width: 600px) { form { grid-template-columns: minmax(0, 1fr); } }
+.field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.field.full { grid-column: 1 / -1; }
+label { font-size: 0.86rem; font-weight: 600; color: var(--fg); }
+label small { font-weight: 400; color: var(--muted); }
+input, select, textarea {
+  width: 100%; min-height: 48px; padding: 12px 14px; border-radius: 12px;
+  border: 1px solid #2c3854; background: var(--sky); color: var(--fg);
+  font: 400 1rem var(--body);
+}
+textarea { min-height: 110px; resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; border-color: transparent; }
+.field .err { color: #ffb4a8; font-size: 0.82rem; min-height: 1em; }
+input[aria-invalid="true"], select[aria-invalid="true"] { border-color: #ff8a78; }
+.form-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; }
+.form-foot p { color: var(--muted); font-size: 0.86rem; max-width: 42ch; }
+.done { display: flex; flex-direction: column; gap: 16px; }
+.done h3 { color: var(--gold); }
+.done pre { margin: 0; white-space: pre-wrap; word-break: break-word; background: var(--sky); border: 1px solid var(--line); border-radius: 12px; padding: 16px; font: 400 0.86rem/1.55 var(--mono); color: var(--fg); max-height: 320px; overflow: auto; }
+.done .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.toast { font-family: var(--mono); font-size: 0.82rem; color: var(--gold-hi); }
+
+footer { padding-block: 48px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; align-items: flex-start; color: var(--muted); font-size: 0.92rem; }
+footer .brand b { font-size: 1.6rem; }
+footer .cols { display: flex; flex-wrap: wrap; gap: 24px 48px; }
+footer .cols div { display: flex; flex-direction: column; gap: 6px; }
+footer .cols .eyebrow { color: var(--gold); margin-bottom: 4px; }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Drone Spectacular Residency home"><b>Drone Spectacular</b><span>Residency</span></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#audiences">Venues &amp; brands</a>
+      <a href="#underwriting">Underwriting</a>
+      <a href="#season">A season</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-gold" href="#apply">Apply</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">The Drone Spectacular Residency Underwriting Program</p>
+        <h1 id="hero-title">A season of drone shows. <em>Free</em> for your venue.</h1>
+        <p class="lede">Drone Spectacular Residency brings a recurring drone light show residency to your amphitheater, resort, ballpark or festival at no cost. Brands underwrite the season for a place in your sky.</p>
+        <div class="ctas">
+          <a class="btn btn-gold" href="#apply" data-pick="venue">Get a free residency</a>
+          <a class="btn btn-ghost" href="#apply" data-pick="sponsor">Underwrite a season</a>
+        </div>
+        <div class="specline" aria-label="Show specifications">
+          <span><b>120 m</b> / 400 ft ceiling</span>
+          <span><b>8–20 min</b> shows</span>
+          <span><b>Pyro-integrated</b> options</span>
+        </div>
+      </div>
+      <div class="hero-sky">
+        <canvas id="sky" role="img" aria-label="Illustration of drones forming the word FREE, a halo, and a sponsor logo placeholder in the night sky"></canvas>
+        <p class="sky-caption" id="sky-caption">Formation: Halo</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" aria-label="Track record">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><strong>1,000+</strong><span>performances flown</span></div>
+        <div class="stat"><strong>7,998</strong><span>drones in a Guinness World Record light mosaic Drone Spectacular Residency helped deliver</span></div>
+        <div class="stat"><strong>First</strong><span>in Australia to combine pyrotechnics with drone shows</span></div>
+        <div class="stat"><strong>2</strong><span>home bases: Sydney and Los Angeles</span></div>
+      </div>
+      <div class="partners">
+        <span class="eyebrow">Flown for</span>
+        <span>Coca-Cola</span><span>Formula One</span><span>Warner Bros.</span><span>IMAX</span><span>NRL</span><span>Range Rover</span><span>Crown Sydney</span><span>Airtasker</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-title">Your crowd. Their brand. Our fleet.</h2>
+        <p class="lede">Underwriting works the way public radio has always worked. A sponsor pays for the program, the audience gets it free, and everyone hears who made it possible.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="n">STEP 01</span>
+          <h3>The venue applies</h3>
+          <p>Tell us about your space, your crowd and your calendar. We check sightlines, launch area and airspace, then confirm the venue qualifies.</p>
+        </div>
+        <div class="step">
+          <span class="n">STEP 02</span>
+          <h3>A brand underwrites</h3>
+          <p>We match your residency with a sponsor that wants your audience. The sponsor covers production and gets category exclusivity in your sky.</p>
+        </div>
+        <div class="step">
+          <span class="n">STEP 03</span>
+          <h3>Drone Spectacular Residency flies the season</h3>
+          <p>We handle choreography, permits, insurance, crew and weather calls. After the season, both sides get a recap with attendance, QR scans and social reach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="audiences" aria-labelledby="aud-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Two sides of the same sky</p>
+        <h2 id="aud-title">What each partner gets</h2>
+      </div>
+      <div class="switch" role="tablist" aria-label="Choose your side">
+        <button role="tab" id="tab-venue" aria-controls="panel-venue" aria-selected="true">I run a venue</button>
+        <button role="tab" id="tab-sponsor" aria-controls="panel-sponsor" aria-selected="false" tabindex="-1">I represent a brand</button>
+      </div>
+
+      <div class="panel" id="panel-venue" role="tabpanel" aria-labelledby="tab-venue">
+        <div class="panel-copy">
+          <h3>A reason to come back every week</h3>
+          <p class="lede">A residency turns a one-off spectacle into a habit. Guests plan around show nights, stay longer, and post every one of them.</p>
+          <a class="btn btn-gold" href="#apply" data-pick="venue" style="align-self:flex-start">Apply as a venue</a>
+        </div>
+        <ul class="panel-list">
+          <li><span class="k">Cost</span><span class="v">Nothing. Production, crew, permits and insurance are covered by the season's underwriter.</span></li>
+          <li><span class="k">The run</span><span class="v">A set season, such as 8 weeks of Friday nights or a full summer series.</span></li>
+          <li><span class="k">Your part</span><span class="v">Promote the shows, share show-night attendance, and give the sponsor space to activate on site.</span></li>
+          <li><span class="k">Your say</span><span class="v">You approve the sponsor before anything is signed. No brand flies over your venue without your yes.</span></li>
+          <li><span class="k">Good fits</span><span class="v">Amphitheaters, stadiums, minor league ballparks, beach clubs, resorts, wineries, racetracks, casinos, festivals.</span></li>
+        </ul>
+      </div>
+
+      <div class="panel" id="panel-sponsor" role="tabpanel" aria-labelledby="tab-sponsor" hidden>
+        <div class="panel-copy">
+          <h3>Own the moment everyone looks up</h3>
+          <p class="lede">Nobody skips a drone show. Thousands of people stop, look up and start filming, and your brand is the thing in the frame.</p>
+          <a class="btn btn-gold" href="#apply" data-pick="sponsor" style="align-self:flex-start">Underwrite a season</a>
+        </div>
+        <ul class="panel-list">
+          <li><span class="k">In the sky</span><span class="v">Logo and product formations, plus scannable QR codes that link to your offer.</span></li>
+          <li><span class="k">On the ground</span><span class="v">"Presented by" billing in venue promotion, sampling, booths and activation space.</span></li>
+          <li><span class="k">Exclusivity</span><span class="v">One brand per category per residency. Your competitor will not appear in that sky.</span></li>
+          <li><span class="k">Content</span><span class="v">Rights to show footage for your own social and paid media.</span></li>
+          <li><span class="k">Proof</span><span class="v">A post-season report with attendance, QR scans and social reach.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="underwriting" aria-labelledby="tiers-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Sponsor Underwriting Program</p>
+        <h2 id="tiers-title">Ways to underwrite</h2>
+        <p class="lede">Buy one night, one moment, a full season, or a network of venues across a market.</p>
+      </div>
+      <div class="tiers">
+        <article class="tier feature">
+          <p class="scope">Full season · Exclusive</p>
+          <h3>Season Presenting Underwriter</h3>
+          <p class="price">From [YOUR PRICE] / season</p>
+          <ul>
+            <li>Naming credit on the whole residency</li>
+            <li>Opening and closing formations every show</li>
+            <li>Sky QR code every night</li>
+            <li>Category exclusivity at the venue</li>
+          </ul>
+          <a class="btn btn-gold" href="#apply" data-pick="sponsor" data-tier="Season Presenting Underwriter">Start here</a>
+        </article>
+        <article class="tier">
+          <p class="scope">One night</p>
+          <h3>Show Night Underwriter</h3>
+          <p class="price">From [YOUR PRICE] / show</p>
+          <ul>
+            <li>Full-show takeover for a launch or event</li>
+            <li>Custom choreography for your product</li>
+            <li>On-site activation that night</li>
+          </ul>
+          <a class="btn btn-ghost" href="#apply" data-pick="sponsor" data-tier="Show Night Underwriter">Ask about dates</a>
+        </article>
+        <article class="tier">
+          <p class="scope">One moment per show</p>
+          <h3>Segment Underwriter</h3>
+          <p class="price">From [YOUR PRICE] / segment</p>
+          <ul>
+            <li>A branded formation inside a shared show</li>
+            <li>Optional QR moment</li>
+            <li>Lowest cost of entry</li>
+          </ul>
+          <a class="btn btn-ghost" href="#apply" data-pick="sponsor" data-tier="Segment Underwriter">Ask about segments</a>
+        </article>
+        <article class="tier">
+          <p class="scope">Multiple venues · One market</p>
+          <h3>Network Underwriter</h3>
+          <p class="price">From [YOUR PRICE] / market</p>
+          <ul>
+            <li>One brand across several residencies</li>
+            <li>Bought like a radio network buy</li>
+            <li>Combined market reporting</li>
+          </ul>
+          <a class="btn btn-ghost" href="#apply" data-pick="sponsor" data-tier="Network Underwriter">Plan a network</a>
+        </article>
+      </div>
+      <p class="addons"><b>Add-ons:</b> pyrotechnic integration, product-reveal choreography, recap video package, livestream and broadcast tie-ins.</p>
+    </div>
+  </section>
+
+  <section class="block" id="season" aria-labelledby="season-title">
+    <div class="wrap">
+      <div class="sheet">
+        <div class="sheet-copy">
+          <p class="eyebrow">What a residency looks like</p>
+          <h2 id="season-title">A season, on one page</h2>
+          <p class="lede">Every residency is scoped to the venue. This example shows the shape of a typical summer run so venues and sponsors can picture the commitment.</p>
+          <a class="btn btn-ghost" href="#apply" style="align-self:flex-start">Scope my season</a>
+        </div>
+        <div class="sheet-table">
+          <table>
+            <caption>Example season · illustrative only</caption>
+            <tbody>
+              <tr><th scope="row">Run</th><td>8 weeks, Friday and Saturday nights</td></tr>
+              <tr><th scope="row">Shows</th><td>16 performances</td></tr>
+              <tr><th scope="row">Show length</th><td>12 minutes, timed to the venue's peak crowd</td></tr>
+              <tr><th scope="row">Sponsor moments</th><td>Opening reveal, mid-show formation, closing QR code</td></tr>
+              <tr><th scope="row">Ceiling</th><td>Up to 120 m (400 ft) above ground, per local rules</td></tr>
+              <tr><th scope="row">Weather</th><td>Go / no-go call by Drone Spectacular Residency; scrubbed shows are rescheduled</td></tr>
+              <tr><th scope="row">Reporting</th><td>Nightly attendance, QR scans, season recap</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="safety" aria-labelledby="safety-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Safety, airspace &amp; permits</p>
+        <h2 id="safety-title">We handle the hard part</h2>
+      </div>
+      <div class="safety">
+        <div class="safe">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <h3>Airspace approvals</h3>
+          <p>FAA Part 107 waivers and airspace authorizations in the US, CASA approvals in Australia.</p>
+        </div>
+        <div class="safe">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+          <h3>Local permits</h3>
+          <p>We work with the city, fire marshal and venue operations on every show night.</p>
+        </div>
+        <div class="safe">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+          <h3>Weather calls</h3>
+          <p>Wind and rain limits are set in advance. If a show can't fly safely, it doesn't, and it gets rescheduled.</p>
+        </div>
+        <div class="safe">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 20v-5h4v5"/></svg>
+          <h3>Fully insured</h3>
+          <p>Liability coverage on every show, with the venue named as additional insured.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Questions</p>
+        <h2 id="faq-title">The fine print, in plain words</h2>
+      </div>
+      <div class="faq-cols">
+        <div class="faq-col">
+          <h3>For venues</h3>
+          <details><summary>Is it really free?</summary><p>Yes. The underwriter pays for production. The venue commits to promoting the shows, sharing attendance and hosting the sponsor's on-site activation.</p></details>
+          <details><summary>Who picks the sponsor?</summary><p>Drone Spectacular Residency brings the sponsor and you approve it. You can also introduce a brand you already work with.</p></details>
+          <details><summary>Can we say no to a brand?</summary><p>Yes. Nothing is signed until the venue approves the sponsor and the creative.</p></details>
+          <details><summary>What do we need on site?</summary><p>A secure launch area, a clear audience zone and safe sightlines. We assess all of it before you're accepted.</p></details>
+        </div>
+        <div class="faq-col">
+          <h3>For brands</h3>
+          <details><summary>What's guaranteed?</summary><p>The number of shows, your formations and QR moments, and category exclusivity. Weather-scrubbed shows are rescheduled.</p></details>
+          <details><summary>How is attendance verified?</summary><p>Venues report show-night attendance as a condition of the residency, and every QR scan is tracked.</p></details>
+          <details><summary>Can we bring our own creative?</summary><p>Yes. Our designers turn your logo and campaign into formations, and you approve every frame before it flies.</p></details>
+          <details><summary>Can we buy more than one venue?</summary><p>Yes. The Network tier puts one brand across several residencies in a market.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block apply" id="apply" aria-labelledby="apply-title">
+    <div class="wrap">
+      <div class="apply-grid">
+        <div class="apply-copy">
+          <p class="eyebrow">Apply</p>
+          <h2 id="apply-title">Put your name in the sky</h2>
+          <p class="lede">Venues apply for a free residency. Brands ask about underwriting. We reply within two business days.</p>
+          <div class="contact-lines">
+            <span>Email <b>laughlincoo@gmail.com</b></span>
+            <span>US <b>+1 213-446-2812</b></span>
+            <span>AU <b>+61 2 8806 2248</b></span>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="switch" role="tablist" aria-label="Who is applying">
+            <button role="tab" id="ftab-venue" aria-controls="form-wrap" aria-selected="true">Venue</button>
+            <button role="tab" id="ftab-sponsor" aria-controls="form-wrap" aria-selected="false" tabindex="-1">Brand / sponsor</button>
+          </div>
+
+          <div id="form-wrap" role="tabpanel">
+            <form id="apply-form" novalidate>
+              <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required><span class="err" id="e-name"></span></div>
+              <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required><span class="err" id="e-email"></span></div>
+              <div class="field"><label for="f-org"><span data-v>Venue name</span><span data-s hidden>Brand or agency</span></label><input id="f-org" name="org" autocomplete="organization" required><span class="err" id="e-org"></span></div>
+              <div class="field"><label for="f-city">City / market</label><input id="f-city" name="city" required><span class="err" id="e-city"></span></div>
+
+              <div class="field" data-v><label for="f-type">Venue type</label>
+                <select id="f-type" name="type">
+                  <option value="">Choose one</option>
+                  <option>Amphitheater or concert venue</option><option>Stadium or ballpark</option><option>Resort or hotel</option>
+                  <option>Beach club</option><option>Winery</option><option>Racetrack</option><option>Casino</option><option>Festival</option><option>Shopping district</option><option>Other</option>
+                </select><span class="err" id="e-type"></span></div>
+              <div class="field" data-v><label for="f-crowd">Typical show-night crowd <small>(people)</small></label><input id="f-crowd" name="crowd" inputmode="numeric" placeholder="e.g. 3,500"><span class="err" id="e-crowd"></span></div>
+
+              <div class="field" data-s hidden><label for="f-tier">Interested in</label>
+                <select id="f-tier" name="tier">
+                  <option value="">Choose one</option>
+                  <option>Season Presenting Underwriter</option><option>Show Night Underwriter</option><option>Segment Underwriter</option><option>Network Underwriter</option><option>Not sure yet</option>
+                </select><span class="err" id="e-tier"></span></div>
+              <div class="field" data-s hidden><label for="f-budget">Budget range</label>
+                <select id="f-budget" name="budget">
+                  <option value="">Prefer to discuss</option><option>Under $25K</option><option>$25K–$100K</option><option>$100K–$250K</option><option>$250K+</option>
+                </select><span class="err"></span></div>
+
+              <div class="field full"><label for="f-dates">Preferred dates or season</label><input id="f-dates" name="dates" placeholder="e.g. Summer 2027, Friday nights"><span class="err"></span></div>
+              <div class="field full"><label for="f-notes">Anything else <small>(optional)</small></label><textarea id="f-notes" name="notes" placeholder="Launch area, audience, goals for the season"></textarea></div>
+
+              <div class="form-foot">
+                <p>Submitting prepares your inquiry to send to the Drone Spectacular Residency team.</p>
+                <button class="btn btn-gold" type="submit" id="f-submit">Submit venue application</button>
+              </div>
+            </form>
+
+            <div class="done" id="done" hidden aria-live="polite">
+              <h3>Your inquiry is ready</h3>
+              <p class="lede">Copy it and email it to <b class="mono" style="color:var(--fg)">laughlincoo@gmail.com</b>, or open it in your mail app.</p>
+              <pre id="summary"></pre>
+              <div class="row">
+                <button class="btn btn-gold" type="button" id="copy">Copy inquiry</button>
+                <a class="btn btn-ghost" id="mail" href="mailto:laughlincoo@gmail.com">Open in mail app</a>
+                <button class="btn btn-ghost" type="button" id="edit">Edit</button>
+                <span class="toast" id="toast" role="status"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:36ch">
+      <a class="brand" href="#top"><b>Drone Spectacular</b><span>Residency</span></a>
+      <p>A Drone Spectacular Residency program. Free residencies for venues, underwritten by brands.</p>
+    </div>
+    <div class="cols">
+      <div><span class="eyebrow">Program</span><a href="#how">How it works</a><a href="#underwriting">Underwriting tiers</a><a href="#season">Example season</a></div>
+      <div><span class="eyebrow">Contact</span><span>laughlincoo@gmail.com</span><span>+1 213-446-2812</span><span>+61 2 8806 2248</span></div>
+      <div><span class="eyebrow">Drone Spectacular Residency</span><span>Sydney · Los Angeles</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* ---------- Drone sky ---------- */
+  var canvas = document.getElementById('sky');
+  var caption = document.getElementById('sky-caption');
+  var ctx = canvas.getContext('2d');
+  var N = 420, drones = [], W = 0, H = 0, dpr = 1;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var formations = [
+    { name: 'Halo', fn: halo },
+    { name: 'FREE', fn: function () { return textPoints('FREE', 0.34); } },
+    { name: 'Your logo here', fn: function () { return textPoints('YOUR\nLOGO', 0.24); } },
+    { name: 'Sky QR code', fn: qr }
+  ];
+  var current = 0, t0 = 0;
+
+  function size() {
+    var r = canvas.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.max(200, r.width); H = Math.max(200, r.height);
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function rand(seed) { var x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x); }
+  function halo() {
+    var pts = [], cx = 0.5, cy = 0.47;
+    var rings = [[0.36, 150], [0.29, 120], [0.21, 90], [0.11, 50], [0.03, 10]];
+    rings.forEach(function (rg, j) {
+      for (var i = 0; i < rg[1]; i++) {
+        var a = (i / rg[1]) * Math.PI * 2 + j * 0.2;
+        pts.push([cx + Math.cos(a) * rg[0], cy + Math.sin(a) * rg[0] * 0.98]);
+      }
+    });
+    return pts;
+  }
+  function qr() {
+    var pts = [], n = 21, s = 0.62 / n, ox = 0.19, oy = 0.16;
+    function finder(x, y) { var f = []; for (var i = 0; i < 7; i++) for (var j = 0; j < 7; j++) { var e = i === 0 || i === 6 || j === 0 || j === 6; var c = i >= 2 && i <= 4 && j >= 2 && j <= 4; if (e || c) f.push([x + i, y + j]); } return f; }
+    var cells = finder(0, 0).concat(finder(14, 0), finder(0, 14));
+    for (var i = 0; i < n; i++) for (var j = 0; j < n; j++) {
+      var inF = (i < 8 && j < 8) || (i > 12 && j < 8) || (i < 8 && j > 12);
+      if (!inF && rand(i * 31 + j * 7) > 0.52) cells.push([i, j]);
+    }
+    cells.forEach(function (c) { pts.push([ox + c[0] * s + s / 2, oy + c[1] * s + s / 2]); });
+    return pts;
+  }
+  function textPoints(str, scale) {
+    var c = document.createElement('canvas'), w = 300, h = 300; c.width = w; c.height = h;
+    var g = c.getContext('2d'); g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    var lines = str.split('\n'), fs = Math.round(h * scale);
+    g.font = '800 ' + fs + 'px "Big Shoulders Display", "Arial Narrow", sans-serif';
+    lines.forEach(function (ln, i) { g.fillText(ln, w / 2, h / 2 + (i - (lines.length - 1) / 2) * fs * 0.95); });
+    var data = g.getImageData(0, 0, w, h).data, pts = [];
+    for (var y = 0; y < h; y += 5) for (var x = 0; x < w; x += 5) if (data[(y * w + x) * 4 + 3] > 128) pts.push([x / w, y / h * 0.94]);
+    return pts;
+  }
+  function assign(pts) {
+    for (var i = 0; i < N; i++) {
+      var d = drones[i], p;
+      if (i < pts.length) { p = pts[Math.floor(i * pts.length / Math.max(N, pts.length)) % pts.length]; d.on = 1; }
+      else { p = pts[i % pts.length]; d.on = pts.length >= N ? 1 : 0; }
+      if (pts.length < N && i >= pts.length) { p = [0.1 + rand(i) * 0.8, 0.92 + rand(i + 3) * 0.05]; d.on = 0.18; }
+      d.sx = d.x; d.sy = d.y; d.tx = p[0]; d.ty = p[1];
+    }
+  }
+  function init() {
+    for (var i = 0; i < N; i++) drones.push({ x: 0.1 + rand(i + 11) * 0.8, y: 0.93 + rand(i + 17) * 0.05, sx: 0, sy: 0, tx: 0, ty: 0, on: 1, tw: rand(i + 5) * 6.28 });
+    var pts = formations[0].fn();
+    assign(pts);
+    if (reduce) drones.forEach(function (d) { d.x = d.tx; d.y = d.ty; });
+  }
+  function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function draw(now) {
+    if (!t0) t0 = now;
+    var el = (now - t0) / 1000;
+    var hold = 3.2, move = 2.4;
+    if (!reduce && el > hold + move) {
+      current = (current + 1) % formations.length;
+      caption.textContent = 'Formation: ' + formations[current].name;
+      assign(formations[current].fn()); t0 = now; el = 0;
+    }
+    var k = reduce ? 1 : ease(Math.min(1, el / move));
+    ctx.clearRect(0, 0, W, H);
+    var r = Math.max(1.4, W / 260);
+    for (var i = 0; i < drones.length; i++) {
+      var d = drones[i];
+      if (!reduce) { d.x = d.sx + (d.tx - d.sx) * k; d.y = d.sy + (d.ty - d.sy) * k; }
+      var tw = 0.75 + 0.25 * Math.sin(now / 420 + d.tw);
+      var a = d.on * tw;
+      var px = d.x * W, py = d.y * H;
+      ctx.globalAlpha = a * 0.22; ctx.fillStyle = '#e3b964';
+      ctx.beginPath(); ctx.arc(px, py, r * 3.2, 0, 6.283); ctx.fill();
+      ctx.globalAlpha = a; ctx.fillStyle = '#fbe6b4';
+      ctx.beginPath(); ctx.arc(px, py, r, 0, 6.283); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); init();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (current) assign(formations[current].fn()); });
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+  requestAnimationFrame(draw);
+
+  /* ---------- Tabs ---------- */
+  function wireTabs(btns, onPick) {
+    btns.forEach(function (b, i) {
+      b.addEventListener('click', function () { onPick(i); });
+      b.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault(); var n = (i + (e.key === 'ArrowRight' ? 1 : btns.length - 1)) % btns.length;
+          onPick(n); btns[n].focus();
+        }
+      });
+    });
+  }
+  function setSel(btns, i) { btns.forEach(function (b, j) { b.setAttribute('aria-selected', j === i ? 'true' : 'false'); b.tabIndex = j === i ? 0 : -1; }); }
+
+  var audBtns = [document.getElementById('tab-venue'), document.getElementById('tab-sponsor')];
+  var audPanels = [document.getElementById('panel-venue'), document.getElementById('panel-sponsor')];
+  function pickAud(i) { setSel(audBtns, i); audPanels.forEach(function (p, j) { p.hidden = j !== i; }); }
+  wireTabs(audBtns, pickAud);
+
+  /* ---------- Form ---------- */
+  var form = document.getElementById('apply-form');
+  var fBtns = [document.getElementById('ftab-venue'), document.getElementById('ftab-sponsor')];
+  var mode = 'venue';
+  function setMode(m) {
+    mode = m; setSel(fBtns, m === 'venue' ? 0 : 1);
+    form.querySelectorAll('[data-v]').forEach(function (el) { el.hidden = m !== 'venue'; });
+    form.querySelectorAll('[data-s]').forEach(function (el) { el.hidden = m !== 'sponsor'; });
+    document.getElementById('f-submit').textContent = m === 'venue' ? 'Submit venue application' : 'Submit sponsor inquiry';
+    showForm();
+  }
+  wireTabs(fBtns, function (i) { setMode(i === 0 ? 'venue' : 'sponsor'); });
+
+  document.querySelectorAll('[data-pick]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      setMode(a.getAttribute('data-pick'));
+      var tier = a.getAttribute('data-tier'); if (tier) document.getElementById('f-tier').value = tier;
+    });
+  });
+
+  function val(id) { return document.getElementById(id).value.trim(); }
+  function setErr(id, msg) {
+    var input = document.getElementById('f-' + id), e = document.getElementById('e-' + id);
+    if (e) e.textContent = msg || '';
+    if (input) input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    return !msg;
+  }
+  function validate() {
+    var ok = true, first = null;
+    function check(id, msg) { var good = setErr(id, msg); if (!good && !first) first = id; ok = ok && good; }
+    check('name', val('f-name') ? '' : 'Add your name.');
+    var em = val('f-email');
+    check('email', !em ? 'Add an email so we can reply.' : (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em) ? '' : 'Check the email address. It needs an @ and a domain.'));
+    check('org', val('f-org') ? '' : (mode === 'venue' ? 'Add the venue name.' : 'Add the brand or agency name.'));
+    check('city', val('f-city') ? '' : 'Add the city or market.');
+    if (mode === 'venue') {
+      check('type', val('f-type') ? '' : 'Choose the closest venue type.');
+      var c = val('f-crowd').replace(/[,\s]/g, '');
+      check('crowd', !c ? 'Add a typical crowd size.' : (/^\d+$/.test(c) ? '' : 'Use a number, like 3500.'));
+    } else {
+      check('tier', val('f-tier') ? '' : 'Choose a tier, or "Not sure yet".');
+    }
+    if (first) document.getElementById('f-' + first).focus();
+    return ok;
+  }
+  function summary() {
+    var lines = [];
+    if (mode === 'venue') {
+      lines.push('DRONE SPECTACULAR RESIDENCY · VENUE APPLICATION', '');
+      lines.push('Name: ' + val('f-name'), 'Email: ' + val('f-email'), 'Venue: ' + val('f-org'), 'City / market: ' + val('f-city'), 'Venue type: ' + val('f-type'), 'Typical crowd: ' + val('f-crowd'));
+    } else {
+      lines.push('DRONE SPECTACULAR RESIDENCY · SPONSOR UNDERWRITING INQUIRY', '');
+      lines.push('Name: ' + val('f-name'), 'Email: ' + val('f-email'), 'Brand / agency: ' + val('f-org'), 'Market: ' + val('f-city'), 'Interested in: ' + val('f-tier'), 'Budget: ' + (val('f-budget') || 'Prefer to discuss'));
+    }
+    if (val('f-dates')) lines.push('Preferred dates: ' + val('f-dates'));
+    if (val('f-notes')) lines.push('', 'Notes:', val('f-notes'));
+    return lines.join('\n');
+  }
+  function showForm() { form.hidden = false; document.getElementById('done').hidden = true; }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validate()) return;
+    var text = summary();
+    document.getElementById('summary').textContent = text;
+    var subj = mode === 'venue' ? 'Residency application: ' + val('f-org') : 'Underwriting inquiry: ' + val('f-org');
+    document.getElementById('mail').href = 'mailto:laughlincoo@gmail.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(text);
+    form.hidden = true; document.getElementById('done').hidden = false;
+    document.getElementById('toast').textContent = '';
+    document.getElementById('copy').focus();
+  });
+  document.getElementById('edit').addEventListener('click', function () { showForm(); document.getElementById('f-name').focus(); });
+  document.getElementById('copy').addEventListener('click', function () {
+    var text = document.getElementById('summary').textContent, toast = document.getElementById('toast');
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('summary'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      toast.textContent = 'Selected. Press Ctrl+C or ⌘C to copy.';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { toast.textContent = 'Copied'; }, fallback);
+    } catch (err) { fallback(); }
+  });
+  form.addEventListener('input', function (e) { if (e.target.id) setErr(e.target.id.replace('f-', ''), ''); });
+})();
+</script>
+
+</body></html>
